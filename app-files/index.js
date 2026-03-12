@@ -472,6 +472,8 @@
     floorPlanOverlayElement.classList.add('is-open');
     floorPlanOverlayElement.setAttribute('aria-hidden', 'false');
     stopAutorotate();
+    // Marcar que el plano está abierto para poder ocultar el botón de toggle.
+    document.body.classList.add('floorplan-open');
   }
 
   function closeFloorPlan() {
@@ -479,6 +481,7 @@
     floorPlanOverlayElement.classList.remove('is-open');
     floorPlanOverlayElement.setAttribute('aria-hidden', 'true');
     startAutorotate();
+    document.body.classList.remove('floorplan-open');
   }
 
   function toggleFloorPlan() {
