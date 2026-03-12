@@ -1,0 +1,16 @@
+{
+  "name": "recorrido-virtual-fiorino",
+  "version": "1.0.0",
+  "description": "Recorrido virtual 360 (Marzipano)",
+  "scripts": {
+    "dev": "http-server \"app-files\" -p 8000 -c-1",
+    "dev:alt": "py -m http.server 8000 --directory \"app-files\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

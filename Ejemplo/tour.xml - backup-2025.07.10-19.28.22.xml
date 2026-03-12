@@ -1,0 +1,303 @@
+﻿<krpano version="1.22" title="Viverdi">
+
+	<include url="skin/vtourskin.xml" />
+
+	<include url="FloorPlan/xml/floorplan_SM.xml" />
+
+	<include url="plugins/swipe_gallery.xml" />
+
+	
+	<!-- events -->
+	
+	<events onresize="make_gallery(get(activeGallery));" />
+	
+	<!-- layers -->
+	
+	<layer name="gallery" type="container" align="center" width="100%" y="-15" height="100%" alpha="0" autoalpha="true" bgcolor="0x000000" bgalpha="0.0" keep="true" scale="0.8">
+		<layer name="gallery_scrollarea" url="%SWFPATH%/plugins/scrollarea.swf" alturl="%SWFPATH%/plugins/scrollarea.js" keep="true" align="left" width="0" height="100%" zorder="1" direction="h" ondown="set(gallery_scrollarea_start_pos, get(x))">
+		</layer>
+		<layer name="arrow_left"  align="left"  x="10" keep="true" visible="false" zorder="2" onclick="move_image(left)" url="img/arrow_left.png"  />
+		<layer name="arrow_right" align="right" x="10" keep="true" visible="false" zorder="2" onclick="move_image(right)" url="img/arrow_right.png" />
+		<layer name="gallery_close" align="righttop" x="0" y="0" keep="true" zorder="2" onclick="hide_gallery()" url="img/close.png" />
+	</layer>
+
+	<layer  devices="mobile" name="gallery" type="container" align="center" width="100%" y="-15" height="100%" alpha="0" autoalpha="true" bgcolor="0x000000" bgalpha="0.0" keep="true" scale="0.8">
+		<layer name="gallery_scrollarea" url="%SWFPATH%/plugins/scrollarea.swf" alturl="%SWFPATH%/plugins/scrollarea.js" keep="true" align="left" width="0" height="100%" zorder="1" direction="h" ondown="set(gallery_scrollarea_start_pos, get(x))">
+		</layer>
+		<layer name="arrow_left"  align="left"  x="10" keep="true" visible="false" zorder="2" onclick="move_image(left)" url="img/arrow_left.png"  />
+		<layer name="arrow_right" align="right" x="10" keep="true" visible="false" zorder="2" onclick="move_image(right)" url="img/arrow_right.png" />
+		<layer devices="desktop" name="gallery_close" align="righttop" x="0" y="0" keep="true" zorder="2" onclick="hide_gallery()" url="img/close.png" />
+		<layer  name="gallery_close" align="righttop" x="0" y="175" keep="true" zorder="2" onclick="hide_gallery()" url="img/close.png" />
+	</layer>
+	
+	<!-- hotspots -->
+	
+	<layer name="hs1" style="hs_gallery" galleryname="gallery1" url="img/hs_gallery.png" scale="0.5" keep="true" vr="false" enabled="true" align="righttop" x="9" y="135" />
+	
+	
+	<!-- styles -->
+	
+	<style  name="hs_gallery"
+			url="img/hs_gallery.png"
+			onclick="show_gallery(get(galleryname))"
+			/>
+	
+	<!-- data -->
+
+	<gallery name="gallery1" title="Fotos">
+		<img name="img1" url="img/pic1.jpg" />
+		<img name="img2" url="img/pic2.jpg"  />
+		<img name="img3" url="img/pic3.jpg"  />
+		<img name="img4" url="img/pic4.jpg"  />
+		<img name="img5" url="img/pic5.jpg" />
+		<img name="img6" url="img/pic6.jpg" />
+		
+		
+	</gallery>
+	
+
+
+	
+
+	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
+	<skin_settings maps="false"
+	               maps_type="google"
+	               maps_bing_api_key=""
+	               maps_google_api_key=""
+	               maps_zoombuttons="false"
+	               maps_loadonfirstuse="true"
+	               gyro="true"
+	               gyro_keeplookingdirection="false"
+	               webvr="true"
+	               webvr_keeplookingdirection="true"
+	               webvr_prev_next_hotspots="true"
+	               autotour="false"
+	               littleplanetintro="false"
+	               followmousecontrol="false"
+	               title="true"
+	               thumbs="true"
+	               thumbs_width="120" thumbs_height="80" thumbs_padding="10" thumbs_crop="0|40|240|160"
+	               thumbs_opened="false"
+	               thumbs_text="false"
+	               thumbs_dragging="true"
+	               thumbs_onhoverscrolling="false"
+	               thumbs_scrollbuttons="false"
+	               thumbs_scrollindicator="false"
+	               thumbs_loop="false"
+	               tooltips_buttons="false"
+	               tooltips_thumbs="false"
+	               tooltips_hotspots="true"
+	               tooltips_mapspots="false"
+	               deeplinking="false"
+	               loadscene_flags="MERGE"
+	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadingtext=""
+	               layout_width="100%"
+	               layout_maxwidth="814"
+	               controlbar_width="-24"
+	               controlbar_height="40"
+	               controlbar_offset="20"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="10"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin.png"
+	               design_bgcolor="0xffffff"
+	               design_bgalpha="0.8"
+	               design_bgborder="0"
+	               design_bgroundedge="1"
+	               design_bgshadow="0 4 10 0xffffff 0.3"
+	               design_thumbborder_bgborder="3 0xFFFFFF 1.0"
+	               design_thumbborder_padding="2"
+	               design_thumbborder_bgroundedge="0"
+	               design_text_css="color:#000000; font-family:Futara;"
+	               design_text_shadow="1"
+	               />
+
+	<!--
+	    For an alternative skin design either change the <skin_settings> values 
+	    from above or optionally include one of the predefined designs from below.
+	-->
+	<!-- <include url="skin/vtourskin_design_flat_light.xml"  /> -->
+	<!-- <include url="skin/vtourskin_design_glass.xml"       /> -->
+	<include url="skin/vtourskin_design_ultra_light.xml" />
+	<!-- <include url="skin/vtourskin_design_117.xml"         /> -->
+	<!-- <include url="skin/vtourskin_design_117round.xml"    /> -->
+	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
+
+	
+
+	<layer name="logomarval" url="botones/logom.png" scale="0.15" keep="true" vr="false" enabled="true" align="righttop" x="5" y="10" onclick="openurl('https://marval.com.co/',_blank);"/>
+
+	
+	<scene name="scene_alcoba_2" title="ALCOBA 2" onstart="" thumburl="panos/ALCOBA_2.tiles/thumb.jpg" lat="3.42900667" lng="-76.54739833" alt="1031.20" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/ALCOBA_2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/ALCOBA_2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_alcoba_principal" title="ALCOBA PRINCIPAL" onstart="" thumburl="panos/ALCOBA_PRINCIPAL.tiles/thumb.jpg" lat="3.42901667" lng="-76.54741000" alt="1030.70" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/ALCOBA_PRINCIPAL.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/ALCOBA_PRINCIPAL.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_balcon" title="BALCON" onstart="" thumburl="panos/BALCON.tiles/thumb.jpg" lat="3.42898667" lng="-76.54739667" alt="1030.50" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/BALCON.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/BALCON.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_bano_ppal" title="BANO PPAL" onstart="" thumburl="panos/BANO_PPAL.tiles/thumb.jpg" lat="3.42904833" lng="-76.54742500" alt="1030.30" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/BANO_PPAL.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/BANO_PPAL.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_bano_social" title="BANO SOCIAL" onstart="" thumburl="panos/BANO_SOCIAL.tiles/thumb.jpg" lat="3.42900667" lng="-76.54739833" alt="1031.20" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/BANO_SOCIAL.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/BANO_SOCIAL.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_cocina" title="COCINA" onstart="" thumburl="panos/COCINA.tiles/thumb.jpg" lat="3.42900000" lng="-76.54738833" alt="1030.90" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/COCINA.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/COCINA.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_comedor" title="COMEDOR" onstart="" thumburl="panos/COMEDOR.tiles/thumb.jpg" lat="3.42902667" lng="-76.54743167" alt="1033.10" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/COMEDOR.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/COMEDOR.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_disponible" title="DISPONIBLE" onstart="" thumburl="panos/DISPONIBLE.tiles/thumb.jpg" lat="3.42901000" lng="-76.54739500" alt="1029.60" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/DISPONIBLE.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/DISPONIBLE.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_hall_de_alcobas" title="HALL DE ALCOBAS" onstart="" thumburl="panos/HALL_DE_ALCOBAS.tiles/thumb.jpg" lat="3.42900500" lng="-76.54737000" alt="1030.50" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/HALL_DE_ALCOBAS.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/HALL_DE_ALCOBAS.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_sala" title="SALA" onstart="" thumburl="panos/SALA.tiles/thumb.jpg" lat="3.42902333" lng="-76.54736833" alt="1027.90" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/SALA.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/SALA.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_vestier" title="VESTIER" onstart="" thumburl="panos/VESTIER.tiles/thumb.jpg" lat="3.42904833" lng="-76.54742500" alt="1030.30" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/VESTIER.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/VESTIER.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+	</scene>
+
+	<scene name="scene_zona_de_ropas" title="ZONA DE ROPAS" onstart="" thumburl="panos/ZONA_DE_ROPAS.tiles/thumb.jpg" lat="3.42904333" lng="-76.54737500" alt="1028.80" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/ZONA_DE_ROPAS.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/ZONA_DE_ROPAS.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+	</scene>
+
+
+</krpano>

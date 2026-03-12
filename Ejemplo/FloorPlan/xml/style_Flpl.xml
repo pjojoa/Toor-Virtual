@@ -1,0 +1,283 @@
+﻿ <krpano>
+ 
+	<include url="%FIRSTXML%/plugins/showtext.xml" />
+	<include url="%FIRSTXML%/plugins/combobox.xml" />
+	
+	<!-- Стиль точки вида -->
+<!-- 	<style name="pointflpl_v" keep="true" type="image" edge="center" distorted="true" width="1" height="prop" zoom="true"  ondown="drag_p()" linkedscene="scene_1" plan="plan_1" title="" url="%FIRSTXML%/FloorPlan/iconPoint/start.png"   /> -->
+		
+		
+	<!-- ////////////////////////////////////         PLAN       /////////////////////////////////////////////////// -->
+	
+	 
+ 	<!--  **********  Окно планов   ************* -->
+	<style name="cont_fp" type="container" keep="true"  width="300" height="200"  enabled="false" alpha="0" onloaded="copy_param();" scalemode="scale" scalechildren="true" x="30" y="30" align="righttop" autoalpha="true" bgcapture="true"  bg="true" bgalpha="0" bgbrightness="1" bgcontrast="1" bgsaturate="1" bghue="0" bginvert="0" bgsepia="0" bgblur="0" fullscr="false"  zorder="30" bgcolor="0x00" />
+	
+	<!--  Контейнер под план -->		
+	<style name="cont_fp2" keep="true" type="container" align="center"  width="100%" height="100%"  maskchildren="true" bgcapture="true" zorder="40" parent="cont_fp_all" bgcolor="0xffffff"  bgborder="0 0xffffff 1.0" bgshadow="5 5 15 0x000000 0.5"    bgroundedge="5"  scalemode="scale" scalechildren="true" bgalpha="0" bg="true" bgbrightness="1" bgcontrast="1" bgsaturate="1" bghue="0" bginvert="0" bgsepia="0" bgblur="0" />		
+			
+	<!-- radar   -->
+	<plugin name="radarEFR" keep="true"  url.html5="%FIRSTXML%/plugins/radar.js" align="center" edge="center" zorder="51" x="0" y="0" parent="activpitflpl" 
+	       scale="0.8" fillalpha="0.5" fillcolor="0x7F5F3F" linewidth="1" linecolor="0xE0E0A0" linealpha="0.5" alpha="1" enabled="true"
+		   heading="0" headingoffset="0" editmode="true" ondown="" onup=""   onloaded="copy(scale, plan_settings.radar_scale)" />
+	
+	<!-- ТОЧКА С РАДАРОМ   -->	
+	<layer name="activpitflpl" keep="true" type="image" align="center"  width="20" height="prop" enabled="false" autoalpha="true" zorder="32" alpha="0"  
+			  url="%FIRSTXML%/FloorPlan/iconPoint/activ.png" />
+
+	<!-- Открыть план -->
+	<layer name="open_flpl_b" keep="true" align="righttop"  url="%FIRSTXML%/FloorPlan/image/plan_button.png"   x="13"  y="70" width="40" height="prop"  enabled="true" alpha="0" 
+					 onover="set(alpha,1)" onout="set(alpha,0.7)" onclick="set(close_pl_butt, false); open_flpl();" />  
+
+	
+		 	
+	<!-- /////////////////     КНОПКИ НА ПЛАНЕ  ////////////////////// -->
+		<style name="butt_fp" type="image" keep="true" url="%FIRSTXML%/FloorPlan/image/fullmap1.png" align="lefttop" edge="center" x="20"  y="15" width="25" height="prop"  zorder="56" alpha="0.5" parent="cont_fp_all"
+				onover="set(alpha, 1);" onout="set(alpha, 0.5);"  /> 	
+					
+		<!-- шапка перетаскивание -->
+		<layer name="plan_top_fp" keep="true" type="container"  width="100%" height="12" y="-10" bgcapture="true" zorder="55" cursor="move" parent="cont_fp_all"
+				bgcolor="0x000000" bgalpha="0.0" bgborder="0 0xffffff 0.0" bgroundedge="0" bgshadow="0 0 10 0x000000 0.0"   
+				ondown="dragPlan()"  />
+				
+		<!-- Полный экран crop="0|0|50|50"-->
+		<layer name="fullscr_fp" style="butt_fp" url="%FIRSTXML%/FloorPlan/image/fullmap1.png" align="lefttop" onclick="fullscrFP()" visible="get:plan_settings.button_fullscreen" />  
+			
+		<!-- закрыть план -->
+		<layer name="close_fp" style="butt_fp" url="%FIRSTXML%/FloorPlan/image/close.png" align="righttop" width="20" onclick="set(close_pl_butt, true); close_flpl()" /> 
+			
+			
+		<!--  плюс -->
+		<layer name="plus_fp" style="butt_fp" url="%FIRSTXML%/FloorPlan/image/plus_minus.png" crop="0|0|64|64" align="bottom" width="25" x="-20" y="16" ondown="zoom_b(1.02)" visible="get:plan_settings.button_plus_minus" /> 
+		<!--  минус -->
+		<layer name="minus_fp" style="butt_fp" url="%FIRSTXML%/FloorPlan/image/plus_minus.png" crop="64|0|64|64" align="bottom" width="25" x="20" y="16" ondown="zoom_b(0.97)" visible="get:plan_settings.button_plus_minus" /> 
+		
+		
+		
+	<!-- //////////////////////////////////////////////    Раздвигать окно плана  ///////////////////////////////////////////////////// -->		
+	
+	<!-- Раздвигать окно  -->		  
+	<style 	name="rastyanuty_flpl "  type="container" keep="true"  edge="center" x="-1" y="-1" width="15" height="15" zorder="65" parent="cont_fp_all" cursor="move"
+				bgcolor="0x222222" bgalpha="0.0" alpha="1" bgcapture="true" bgroundedge="15"  
+				onhover="" onout="" ondown="rastyanutyHS();" onclick="" onloaded="copy(enabled, plan_settings.angle_placemark) "/>	
+				
+	<!-- Раздвигать окно влево низ -->		  
+	<layer name="rastyanuty_LB" style="rastyanuty_flpl" align="leftbottom" cursor="sw-resize" />
+	<!-- Раздвигать окно вправо низ   edge="rightbottom"   x="0" y="0" bgalpha="0.2" width="15" height="15"  bgroundedge="20 0 2 0" bgborder="2,0,0,2 0xffffff 1.0"  -->		  
+	<layer name="rastyanuty_RB" style="rastyanuty_flpl" align="rightbottom" cursor="se-resize" />
+	<!-- Раздвигать окно вправо вверх -->		  
+	<layer name="rastyanuty_RT" style="rastyanuty_flpl" align="righttop" cursor="ne-resize" />
+	<!-- Раздвигать окно влево вверх  -->		  
+	<layer name="rastyanuty_LT" style="rastyanuty_flpl" align="lefttop" cursor="nw-resize" />
+		
+	
+	<!-- при клике свернуть план в первоначальое положение   тест starting_position() -->
+	<action name="starting_position" >  
+		copy(fp, layer[cont_fp_all]);
+		copy(pl, layer[*curent_plan]);
+		
+		tween(fp.x, *fp.start_x);
+		tween(fp.y, *fp.start_y);
+		tween(fp.width, *pl.start_w);
+		tween(fp.height, *pl.start_h); 
+		set(global.anime_full_pl, true);
+		delayedcall(0.6, set(anime_full_pl, false););
+		asyncloop(anime_full_pl, full_cont_pl(*curent_plan));
+	</action>
+
+
+
+ 
+	<!-- Копировать позицию окна плана при загрузке изображения плана-->
+	<action name="copy_param" >  
+		copy(fp, layer[cont_fp_all]);
+		copy(fp.start_x,  fp.x);
+		copy(fp.start_y,  fp.y);
+		copy(alignFP, fp.align);				<!-- Копия в переменные align и edge -->
+		copy(edgeFP, fp.edge);
+		
+		if(editor_on,				<!-- установить х у в редактоор стиля -->
+			delayedcall(1,
+				copy(layer[enter_x_fp].text, layer[cont_fp_all].x); 
+				copy(layer[enter_y_fp].text, layer[cont_fp_all].y);
+			);
+		);
+	</action>
+
+	<!-- Раскрыть план -->
+	<action name="fullscrFP" scope="local"> 
+		copy(fp, layer[cont_fp_all]); 
+		if(!fp.fullscr,
+			set(fp.fullscr, true);
+			copy(global.tempFS_w, fp.width);
+			copy(global.tempFS_h, fp.height);
+			layer[cont_fp_all].changealign(center,center);
+			
+			copy(cur_pl, layer[*curent_plan] );	
+			calc(global.margin_fp, plan_settings.margin_fs * 2);
+			calc(full, '0|0|' +  (stagewidth GT cur_pl.imagewidth? cur_pl.imagewidth : stagewidth - margin_fp )  + '|' + ( stageheight GT cur_pl.imageheight? cur_pl.imageheight : stageheight - margin_fp ) );
+			tween(fp.x|fp.y|fp.width|fp.height, *full);
+			calc(layer[fullscr_fp].url, plan_settings.url_plan + 'image/fullmap2.png');
+			
+			set(global.anime_full_pl, true);
+			delayedcall(0.6, set(anime_full_pl, false););
+			asyncloop(anime_full_pl, full_cont_pl(*curent_plan));
+			,
+			nofullscrFP();
+		); wait(0.5);	<!--  ждать -->
+	</action>
+
+	<!-- Свернуть план-->
+	<action name="nofullscrFP" scope="local">
+		copy(fp,layer[cont_fp_all]);
+		copy(fpimg,layer[*curent_plan]);
+		if(fp.fullscr,
+			set(fp.fullscr, false);
+			fp.changealign(*alignFP,*edgeFP); 
+			
+			//calc(nofull, fp.start_x + '|' + fp.start_y + '|' +  (stagewidth GT fpimg.start_w? fpimg.start_w : stagewidth - margin_fp )  + '|' + ( stageheight GT tempFS_h? tempFS_h : stageheight - margin_fp ) );
+			calc(nofull, fp.start_x + '|' + fp.start_y + '|' + tempFS_w  + '|' + tempFS_h );
+			
+			tween(fp.x|fp.y|fp.width|fp.height, get(nofull));
+			calc(layer[fullscr_fp].url,  plan_settings.url_plan + 'image/fullmap1.png');
+			
+			set(global.anime_full_pl, true);
+			delayedcall(0.5, set(anime_full_pl, false); copy);
+			asyncloop(anime_full_pl, full_cont_pl(*curent_plan));
+		);
+	</action>
+
+	<!-- Закрыть окно -->
+    <action name="close_flpl" >
+		set(layer[cont_fp_all].enabled,false); 
+		tween(layer[cont_fp_all].alpha, 0, 0.5, default,  
+			set(layer[open_flpl_b].enabled,true);
+			tween(layer[open_flpl_b].alpha, 1);
+		);
+		delayedcall(0.1, copy(control.mousefovchange, copy_mousefovchange 
+	</action>
+	
+	<!-- Открыть окно -->
+    <action name="open_flpl" >  
+		set(layer[cont_fp_all].enabled, true);
+		set(layer[open_flpl_b].enabled, false);
+		tween(layer[cont_fp_all].alpha, 1);
+		tween(layer[open_flpl_b].alpha, 0);
+	</action>
+		
+	<!--  ***********************    COMBOBOX LIST OF PLANS    ***************************  -->
+
+	<!--  parent="cont_fp_all" -->
+	<combobox_design name="cb_flpl" margin="0" open_close_speed="0.15"  maxopenheight="1000"  >
+		<style name="combobox_container_style" bgalpha="0.0" bgcolor="0xFFFFFF" bgborder="0 0xFFFFFF 0.5" bgroundedge="3" bgshadow="0 0 3 0x000000 0.0" align="top" zorder="56" y="3" x="0"  parent="cont_fp_all" />
+		<style name="combobox_marker_style"  css="color:#ffffff; font-size:14px; " bg="false" txtshadow="0 0 2 0x000000 0" zorder="50" />
+		<style name="combobox_item_style" css="font-family:Verdana; color:#ffffff; font-size:15px;" padding="4 10" bg="false" bgcolor="0x000000" bgalpha="0.3" bgroundedge="1" txtshadow="0 0 4 0x000000 1.0" />
+	</combobox_design>
+	
+ 
+	
+	
+	<!--  ***********************    COMPASS     ***************************  -->
+	
+	
+	<!-- компас на плане -->
+	<layer name="compas_fp" style="butt_fp" align="rightbottom"  edge="center" width="40" x="25" y="25" url="%FIRSTXML%/FloorPlan/image/compass_ar.png"  enabled="false"
+					onloaded="if(!plan_settings.compass_on_plan, set(alpha,0) );" /> 
+					
+	<!-- Стиль текста1 -->         		   
+	<style name="text_comp1" type="text" keep="true" edge="center" enabled="false" css="font-family:Arial; color:#FFFFFF; font-size:20px;"  
+		    x="1" y="18" padding="3 3"  align="lefttop" background="false"  />
+			
+	<!-- Стиль текста2 -->         		   
+	<style name="text_Com2" type="text" enabled="false" keep="true" edge="center" css="font-family:Arial; color:#FFFFFF; font-size:12px;" 
+		    x="2" y="19" padding="3 3"  align="lefttop" background="false"  />
+	
+   <!-- Риска длинная --> 
+    <style name="riska_compas" type="container" keep="true" edge="top"  width="1" height="10" zorder="40" alpha="1" enabled="false"  
+           bgcapture="true" bgcolor="0xFFFFFF" bgalpha="1" bgshadow="3 3 3 0x000000 0.8" 
+		   parent="bg_compass_flpl" />	 
+		 
+	<!-- Риска короткая --> 
+    <style name="riska_compas2" type="container" keep="true" edge="top"  width="1" height="5" zorder="40" alpha="1" enabled="false"  
+            bgcapture="true" bgcolor="0xFFFFFF" bgalpha="1" bgshadow="3 3 3 0x000000 0.8" bgroundedge="0"
+			parent="bg_compass_flpl" />	 
+	
+	<!-- compass button-->
+	<layer name="compass_button"   keep="true" align="righttop"  x="10" y="50"  url="%FIRSTXML%/FloorPlan/image/Compass.png" width="35" height="prop"  alpha="0.8" zorder="40" rotate="0"
+		 onover="set(alpha,1);" onout="set(alpha,0.8);"
+		 onclick="if(layer[bg_compass_flpl].height == 0, hd_sh_compass(30,1),  hd_sh_compass(0,0) ); "
+	/> 
+	
+	<!-- Фон под компас --> 	 
+	<layer name="bg_compass_flpl"  type="container" keep="true" align="top"  alpha="0.01"   y="-1" x="0"  width="100%" height="1"  maskchildren="true"  enabled="false"
+	       bgcapture="true"  bgcolor="0x555555"  bgalpha="0.7"  bgshadow="0 0 20 10 0x000000 0.3"   
+		   ondown="draggingComp();" >
+		   
+		   <layer  name="target_comp"  type="container" keep="true"  bgcapture="true"  align="center" alpha="0.5" width="1" height="150"
+				   bgcolor="0xFF0000" bgalpha="1" 
+			/>	
+	</layer>	
+ 
+		
+	<!-- N --> 
+    <layer name="N" style="text_comp1" parent="compassm_1" html="[b]N[/b]" css="font-family:Arial; color:#FF6F68; font-size:20px;"  />	 
+	<!-- E --> 
+    <layer name="E" style="text_comp1" parent="compassm_19" html="[b]E[/b]" />	
+	<!-- S --> 
+    <layer name="S" style="text_comp1" parent="compassm_37" html="[b]S[/b]" css="font-family:Arial; color:#267DFF; font-size:20px;" />	 
+    <!-- W --> 
+    <layer name="W" style="text_comp1" parent="compassm_55" html="[b]W[/b]" />
+
+	<!-- NE --> 
+    <layer name="NE" style="text_Com2" parent="compassm_10" html="NE" />	 
+	<!-- SE --> 
+    <layer name="SE" style="text_Com2" parent="compassm_28" html="SE" />	
+	<!-- SW --> 
+    <layer name="SW" style="text_Com2" parent="compassm_46" html="SW" />	 
+    <!-- NW --> 
+    <layer name="NW" style="text_Com2" parent="compassm_64" html="NW" />	
+	 
+	
+
+	
+	<!-- show/hide compass-->	
+	<action name="hd_sh_compass"> 
+		tween(layer[bg_compass_flpl].height, %1); 
+		tween(layer[bg_compass_flpl].alpha, %2);
+	</action>
+		 
+		 
+		 
+	<!-- ///////////////////////    НАВИГАЦИЯ ПО КЛИКУ ВПЕРЕД    /////////////////////////////// -->	 
+	<!-- 			
+		delta_x 					-	Ширина зоны +- в пикселях
+		loadscene_blend 		- 	Смешивания
+		loadscene_flags		-	флаг
+		n3dtransition  			-  	Использовать 3д переход
+		motionblur 				-	Сила эффекта размытия в движении: от 0,0 до 0,9.
+		transitiondelay			-	задержка в секундах перед началом 3D-перехода.
+		transitiontime			-	Время продолжительности в секундах для 3D-перехода.
+		transitiontweentype	-	Тип анимации/интерполяции для 3D-переходного движения.
+		click_hs_capture		-	Если есть в туре хотспоты с capture="false" то клик по ним(сквозь них) не будет учитываться как переход на сцену 
+	-->	
+	
+	<!-- linktarget linkedscene -->
+	<navi_hs
+		delta_x="250"
+		delta_top_y="800"
+		delta_bottom_y="200"
+		loadscene_blend="OPENBLEND(1.5, 0.0, 0.6, 0.5, easeOutQuad)"
+		loadscene_flags="KEEPVIEW"
+		n3dtransition="false"
+		motionblur="0.5"
+		transitiondelay="0.1"
+		transitiontime="1.0"
+		transitiontweentype='"easeOutQuad"'
+		click_hs_capture="true"
+	/>
+	
+	
+	
+</krpano>
+
+

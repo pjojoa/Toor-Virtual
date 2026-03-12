@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Recorrido virtual Fiorino</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+<style> @-ms-viewport { width: device-width; } </style>
+<link rel="stylesheet" href="vendor/reset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="multiple-scenes ">
+
+<div id="pano"></div>
+
+<div id="sceneList">
+  <ul class="scenes">
+    
+      <a href="javascript:void(0)" class="scene" data-id="0-bao-principal">
+        <li class="text">Baño principal</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="1-bao-secundario">
+        <li class="text">Baño secundario</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="2-cocina">
+        <li class="text">Cocina</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="3-comedor">
+        <li class="text">Comedor</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="4-entrada">
+        <li class="text">Entrada</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="5-espacio-abierto">
+        <li class="text">Espacio abierto</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="6-habitacin-entrada-vestier">
+        <li class="text">Habitación entrada vestier</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="7-habitacin-entrada">
+        <li class="text">Habitación entrada</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="8-habitacin-ppal-mesa-de-noche">
+        <li class="text">Habitación ppal mesa de noche</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="9-habitacin-secundaria-2">
+        <li class="text">Habitación secundaria 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="10-habitacin-secundaria">
+        <li class="text">Habitación secundaria</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="11-punto-central-1">
+        <li class="text">Punto central 1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="12-punto-central-2">
+        <li class="text">Punto central 2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="13-punto-medio-espacio-abierto">
+        <li class="text">Punto medio Espacio abierto</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="14-sala">
+        <li class="text">Sala</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="15-vestier">
+        <li class="text">Vestier</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="16-zona-de-oficios">
+        <li class="text">Zona de oficios</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="17-balcon-2">
+        <li class="text">Balcon 2</li>
+      </a>
+    
+  </ul>
+</div>
+
+<a id="brandLogo" href="https://marval.com.co/" target="_blank" rel="noopener noreferrer" aria-label="Abrir sitio de MARVAL">
+  <span class="brandLogo-chip">
+    <span class="brandLogo-mark">M</span>
+    <span class="brandLogo-text">MARVAL</span>
+  </span>
+</a>
+
+<a href="javascript:void(0)" id="autorotateToggle">
+  <img class="icon off" src="img/play.png">
+  <img class="icon on" src="img/pause.png">
+</a>
+
+<a href="javascript:void(0)" id="galleryToggle" aria-label="Abrir galería">
+  <img class="icon" src="img/info.png">
+</a>
+
+<a href="javascript:void(0)" id="floorPlanToggle" aria-label="Abrir plano">
+  <img class="icon" src="img/plano-apartamento.png" alt="">
+</a>
+
+<a href="javascript:void(0)" id="fullscreenToggle">
+  <img class="icon off" src="img/fullscreen.png">
+  <img class="icon on" src="img/windowed.png">
+</a>
+
+<a href="javascript:void(0)" id="sceneListToggle">
+  <img class="icon off" src="img/expand.png">
+  <img class="icon on" src="img/collapse.png">
+</a>
+
+<a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1">
+  <img class="icon" src="img/up.png">
+</a>
+<a href="javascript:void(0)" id="viewDown" class="viewControlButton viewControlButton-2">
+  <img class="icon" src="img/down.png">
+</a>
+<a href="javascript:void(0)" id="viewLeft" class="viewControlButton viewControlButton-3">
+  <img class="icon" src="img/left.png">
+</a>
+<a href="javascript:void(0)" id="viewRight" class="viewControlButton viewControlButton-4">
+  <img class="icon" src="img/right.png">
+</a>
+<a href="javascript:void(0)" id="viewIn" class="viewControlButton viewControlButton-5">
+  <img class="icon" src="img/plus.png">
+</a>
+<a href="javascript:void(0)" id="viewOut" class="viewControlButton viewControlButton-6">
+  <img class="icon" src="img/minus.png">
+</a>
+
+<div id="galleryOverlay" class="galleryOverlay" aria-hidden="true">
+  <div class="galleryOverlay-backdrop" data-gallery-close="true"></div>
+  <div class="galleryOverlay-panel" role="dialog" aria-modal="true" aria-label="Galería">
+    <div class="galleryOverlay-header">
+      <div class="galleryOverlay-title">Fotos</div>
+      <button class="galleryOverlay-close" type="button" data-gallery-close="true" aria-label="Cerrar">×</button>
+    </div>
+    <div class="galleryOverlay-strip" id="galleryStrip" aria-label="Lista de fotos"></div>
+    <div class="galleryOverlay-hint">Desliza para navegar · Toca una miniatura para ampliar</div>
+  </div>
+</div>
+
+<div id="floorPlanOverlay" class="floorPlanOverlay" aria-hidden="true">
+  <div class="floorPlanOverlay-backdrop"></div>
+  <div class="floorPlanOverlay-panel" role="dialog" aria-modal="true" aria-label="Plano">
+    <div class="floorPlanOverlay-header">
+      <button class="floorPlanOverlay-close" type="button" data-floorplan-close="true" aria-label="Cerrar">×</button>
+    </div>
+    <div class="floorPlanCanvas" aria-label="Plano del apartamento">
+      <img id="floorPlanImage" src="img/plano-apartamento.png" alt="Plano del apartamento">
+      <div id="floorPlanMarkers" class="floorPlan-markers" aria-hidden="true"></div>
+    </div>
+  </div>
+</div>
+
+<script src="vendor/screenfull.min.js" ></script>
+<script src="vendor/bowser.min.js" ></script>
+<script src="vendor/marzipano.js" ></script>
+
+<script src="data.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>

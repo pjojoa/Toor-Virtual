@@ -1,0 +1,349 @@
+﻿<krpano version="1.22" title="Viverdi">
+
+	<include url="skin/vtourskin.xml" />
+
+	<include url="FloorPlan/xml/floorplan_SM.xml" />
+
+	<include url="plugins/swipe_gallery.xml" />
+
+	
+	<!-- events -->
+	
+	<events onresize="make_gallery(get(activeGallery));" />
+	
+	<!-- layers -->
+	
+	<layer name="gallery" type="container" align="center" width="100%" y="-15" height="100%" alpha="0" autoalpha="true" bgcolor="0x000000" bgalpha="0.0" keep="true" scale="0.8">
+		<layer name="gallery_scrollarea" url="%SWFPATH%/plugins/scrollarea.swf" alturl="%SWFPATH%/plugins/scrollarea.js" keep="true" align="left" width="0" height="100%" zorder="1" direction="h" ondown="set(gallery_scrollarea_start_pos, get(x))">
+		</layer>
+		<layer name="arrow_left"  align="left"  x="10" keep="true" visible="false" zorder="2" onclick="move_image(left)" url="img/arrow_left.png"  />
+		<layer name="arrow_right" align="right" x="10" keep="true" visible="false" zorder="2" onclick="move_image(right)" url="img/arrow_right.png" />
+		<layer name="gallery_close" align="righttop" x="0" y="0" keep="true" zorder="2" onclick="hide_gallery()" url="img/close.png" />
+	</layer>
+
+	<layer  devices="mobile" name="gallery" type="container" align="center" width="100%" y="-15" height="100%" alpha="0" autoalpha="true" bgcolor="0x000000" bgalpha="0.0" keep="true" scale="0.8">
+		<layer name="gallery_scrollarea" url="%SWFPATH%/plugins/scrollarea.swf" alturl="%SWFPATH%/plugins/scrollarea.js" keep="true" align="left" width="0" height="100%" zorder="1" direction="h" ondown="set(gallery_scrollarea_start_pos, get(x))">
+		</layer>
+		<layer name="arrow_left"  align="left"  x="10" keep="true" visible="false" zorder="2" onclick="move_image(left)" url="img/arrow_left.png"  />
+		<layer name="arrow_right" align="right" x="10" keep="true" visible="false" zorder="2" onclick="move_image(right)" url="img/arrow_right.png" />
+		<layer devices="desktop" name="gallery_close" align="righttop" x="0" y="0" keep="true" zorder="2" onclick="hide_gallery()" url="img/close.png" />
+		<layer  name="gallery_close" align="righttop" x="0" y="175" keep="true" zorder="2" onclick="hide_gallery()" url="img/close.png" />
+	</layer>
+	
+	<!-- hotspots -->
+	
+	<layer name="hs1" style="hs_gallery" galleryname="gallery1" url="img/hs_gallery.png" scale="0.5" keep="true" vr="false" enabled="true" align="righttop" x="9" y="135" />
+	
+	
+	<!-- styles -->
+	
+	<style  name="hs_gallery"
+			url="img/hs_gallery.png"
+			onclick="show_gallery(get(galleryname))"
+			/>
+	
+	<!-- data -->
+
+	<gallery name="gallery1" title="Fotos">
+		<img name="img1" url="img/pic1.jpg" />
+		<img name="img2" url="img/pic2.jpg"  />
+		<img name="img3" url="img/pic3.jpg"  />
+		<img name="img4" url="img/pic4.jpg"  />
+		<img name="img5" url="img/pic5.jpg" />
+		<img name="img6" url="img/pic6.jpg" />
+		
+		
+	</gallery>
+	
+
+
+	
+
+	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
+	<skin_settings maps="false"
+	               maps_type="google"
+	               maps_bing_api_key=""
+	               maps_google_api_key=""
+	               maps_zoombuttons="false"
+	               maps_loadonfirstuse="true"
+	               gyro="true"
+	               gyro_keeplookingdirection="false"
+	               webvr="true"
+	               webvr_keeplookingdirection="true"
+	               webvr_prev_next_hotspots="true"
+	               autotour="false"
+	               littleplanetintro="false"
+	               followmousecontrol="false"
+	               title="true"
+	               thumbs="true"
+	               thumbs_width="120" thumbs_height="80" thumbs_padding="10" thumbs_crop="0|40|240|160"
+	               thumbs_opened="false"
+	               thumbs_text="false"
+	               thumbs_dragging="true"
+	               thumbs_onhoverscrolling="false"
+	               thumbs_scrollbuttons="false"
+	               thumbs_scrollindicator="false"
+	               thumbs_loop="false"
+	               tooltips_buttons="false"
+	               tooltips_thumbs="false"
+	               tooltips_hotspots="true"
+	               tooltips_mapspots="false"
+	               deeplinking="false"
+	               loadscene_flags="MERGE"
+	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadingtext=""
+	               layout_width="100%"
+	               layout_maxwidth="814"
+	               controlbar_width="-24"
+	               controlbar_height="40"
+	               controlbar_offset="20"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="10"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin.png"
+	               design_bgcolor="0xffffff"
+	               design_bgalpha="0.8"
+	               design_bgborder="0"
+	               design_bgroundedge="1"
+	               design_bgshadow="0 4 10 0xffffff 0.3"
+	               design_thumbborder_bgborder="3 0xFFFFFF 1.0"
+	               design_thumbborder_padding="2"
+	               design_thumbborder_bgroundedge="0"
+	               design_text_css="color:#000000; font-family:Futara;"
+	               design_text_shadow="1"
+	               />
+
+	<!--
+	    For an alternative skin design either change the <skin_settings> values 
+	    from above or optionally include one of the predefined designs from below.
+	-->
+	<!-- <include url="skin/vtourskin_design_flat_light.xml"  /> -->
+	<!-- <include url="skin/vtourskin_design_glass.xml"       /> -->
+	<include url="skin/vtourskin_design_ultra_light.xml" />
+	<!-- <include url="skin/vtourskin_design_117.xml"         /> -->
+	<!-- <include url="skin/vtourskin_design_117round.xml"    /> -->
+	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
+
+	
+
+	<layer name="logomarval" url="botones/logom.png" scale="0.15" keep="true" vr="false" enabled="true" align="righttop" x="5" y="10" onclick="openurl('https://marval.com.co/',_blank);"/>
+
+	<scene name="scene_comedor" title="COMEDOR" onstart="" thumburl="panos/COMEDOR.tiles/thumb.jpg" lat="3.42902667" lng="-76.54743167" alt="1033.10" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="122.934" vlookat="0.103" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/COMEDOR.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/COMEDOR.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<hotspot name="spot1743386723" style="skin_hotspotstyle" ath="159.979" atv="-3.58" depth="1000.0" linkedscene="scene_balcon" />
+		<hotspot name="spot1743386821" style="skin_hotspotstyle" ath="70.842" atv="-3.822" depth="1000.0" linkedscene="scene_sala" />
+		<hotspot name="spot1743386888" style="skin_hotspotstyle" ath="8.943" atv="-3.828" depth="1000.0" linkedscene="scene_cocina" />
+		<hotspot name="spot1743386951" style="skin_hotspotstyle" ath="-29.58" atv="-4.219" depth="1000.0" linkedscene="scene_zona_de_ropas" />
+		<hotspot name="spot1743387055" style="skin_hotspotstyle" ath="-170.796" atv="-3.844" depth="1000.0" linkedscene="scene_disponible" />
+		<hotspot name="spot1743387114" style="skin_hotspotstyle" ath="-114.617" atv="-4.736" depth="1000.0" linkedscene="scene_hall_de_alcobas" />
+
+	</scene>
+
+	
+	<scene name="scene_alcoba_2" title="ALCOBA 2" onstart="" thumburl="panos/ALCOBA_2.tiles/thumb.jpg" lat="3.42900667" lng="-76.54739833" alt="1031.20" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="138.871" vlookat="0.518" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/ALCOBA_2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/ALCOBA_2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<hotspot name="spot1743385224" style="skin_hotspotstyle" ath="-78.564" atv="-3.943" depth="1000.0" linkedscene="scene_hall_de_alcobas" />
+
+	</scene>
+
+	<scene name="scene_alcoba_principal" title="ALCOBA PRINCIPAL" onstart="" thumburl="panos/ALCOBA_PRINCIPAL.tiles/thumb.jpg" lat="3.42901667" lng="-76.54741000" alt="1030.70" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="141.231" vlookat="0.866" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/ALCOBA_PRINCIPAL.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/ALCOBA_PRINCIPAL.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<hotspot name="spot1743385402" style="skin_hotspotstyle" ath="156.522" atv="-4.655" depth="1000.0" linkedscene="scene_vestier" />
+		<hotspot name="spot1743385522" style="skin_hotspotstyle" ath="-84.698" atv="-2.56" depth="1000.0" linkedscene="scene_hall_de_alcobas" />
+
+	</scene>
+
+	<scene name="scene_balcon" title="BALCÓN" onstart="" thumburl="panos/BALCON.tiles/thumb.jpg" lat="3.42898667" lng="-76.54739667" alt="1030.50" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="-127.236" vlookat="2.713" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/BALCON.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/BALCON.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<hotspot name="spot1743385697" style="skin_hotspotstyle" ath="-176.568" atv="-4.141" depth="1000.0" linkedscene="scene_comedor" />
+		<hotspot name="spot1743385772" style="skin_hotspotstyle" ath="-134.748" atv="-3.854" depth="1000.0" linkedscene="scene_sala" />
+
+	</scene>
+
+	<scene name="scene_bano_ppal" title="BAÑO" onstart="" thumburl="panos/BANO_PPAL.tiles/thumb.jpg" lat="3.42904833" lng="-76.54742500" alt="1030.30" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="-247.131" vlookat="0.951" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/BANO_PPAL.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/BANO_PPAL.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<hotspot name="spot1743385985" style="skin_hotspotstyle" ath="8.051" atv="-6.314" depth="1000.0" linkedscene="scene_vestier" />
+
+	</scene>
+
+	<scene name="scene_bano_social" title="BAÑO" onstart="" thumburl="panos/BANO_SOCIAL.tiles/thumb.jpg" lat="3.42900667" lng="-76.54739833" alt="1031.20" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="6.497" vlookat="0.919" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/BANO_SOCIAL.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/BANO_SOCIAL.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<hotspot name="spot1743386147" style="skin_hotspotstyle" ath="96.487" atv="-7.797" depth="1000.0" linkedscene="scene_hall_de_alcobas" />
+
+	</scene>
+
+	<scene name="scene_cocina" title="COCINA" onstart="" thumburl="panos/COCINA.tiles/thumb.jpg" lat="3.42900000" lng="-76.54738833" alt="1030.90" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="109.728" vlookat="4.202" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/COCINA.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/COCINA.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<hotspot name="spot1743386320" style="skin_hotspotstyle" ath="-116.75" atv="-5.27" depth="1000.0" linkedscene="scene_comedor" />
+		<hotspot name="spot1743386417" style="skin_hotspotstyle" ath="-142.024" atv="-4.025" depth="1000.0" linkedscene="scene_balcon" />
+		<hotspot name="spot1743386513" style="skin_hotspotstyle" ath="159.664" atv="-6.348" depth="1000.0" linkedscene="scene_sala" />
+
+	</scene>
+
+	
+
+	<scene name="scene_disponible" title="DISPONIBLE" onstart="" thumburl="panos/DISPONIBLE.tiles/thumb.jpg" lat="3.42901000" lng="-76.54739500" alt="1029.60" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="102.123" vlookat="0.806" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/DISPONIBLE.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/DISPONIBLE.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<hotspot name="spot1743387264" style="skin_hotspotstyle" ath="32.83" atv="-4.665" depth="1000.0" linkedscene="scene_balcon" />
+		<hotspot name="spot1743387404" style="skin_hotspotstyle" ath="-43.016" atv="-4.093" depth="1000.0" linkedscene="scene_sala" />
+		<hotspot name="spot1743387461" style="skin_hotspotstyle" ath="-59.778" atv="-1.315" depth="1000.0" linkedscene="scene_comedor" />
+		<hotspot name="spot1743387542" style="skin_hotspotstyle" ath="167.376" atv="-4.173" depth="1000.0" linkedscene="scene_hall_de_alcobas" />
+
+	</scene>
+
+	<scene name="scene_hall_de_alcobas" title="HALL DE ALCOBAS" onstart="" thumburl="panos/HALL_DE_ALCOBAS.tiles/thumb.jpg" lat="3.42900500" lng="-76.54737000" alt="1030.50" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="88.508" vlookat="0.262" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/HALL_DE_ALCOBAS.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/HALL_DE_ALCOBAS.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<hotspot name="spot1743387660" style="skin_hotspotstyle" ath="88.574" atv="-5.364" depth="1000.0" linkedscene="scene_alcoba_principal" />
+		<hotspot name="spot1743387746" style="skin_hotspotstyle" ath="56.124" atv="-4.439" depth="1000.0" linkedscene="scene_alcoba_2" />
+		<hotspot name="spot1743387855" style="skin_hotspotstyle" ath="-20.836" atv="-3.269" depth="1000.0" linkedscene="scene_disponible" />
+		<hotspot name="spot1743387971" style="skin_hotspotstyle" ath="-91.324" atv="-4.825" depth="1000.0" linkedscene="scene_comedor" />
+		<hotspot name="spot1743388050" style="skin_hotspotstyle" ath="-117.117" atv="-4.364" depth="1000.0" linkedscene="scene_bano_social" />
+
+	</scene>
+
+	<scene name="scene_sala" title="SALA" onstart="" thumburl="panos/SALA.tiles/thumb.jpg" lat="3.42902333" lng="-76.54736833" alt="1027.90" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="159.043" vlookat="0.929" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/SALA.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/SALA.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<hotspot name="spot1743388240" style="skin_hotspotstyle" ath="147.47" atv="-4.156" depth="1000.0" linkedscene="scene_balcon" />
+		<hotspot name="spot1743388336" style="skin_hotspotstyle" ath="-176.779" atv="-4.149" depth="1000.0" linkedscene="scene_disponible" />
+		<hotspot name="spot1743388408" style="skin_hotspotstyle" ath="-161.767" atv="-4.725" depth="1000.0" linkedscene="scene_comedor" />
+		<hotspot name="spot1743388475" style="skin_hotspotstyle" ath="-95.01" atv="-3.171" depth="1000.0" linkedscene="scene_cocina" />
+
+	</scene>
+
+	<scene name="scene_vestier" title="VESTIER" onstart="" thumburl="panos/VESTIER.tiles/thumb.jpg" lat="3.42904833" lng="-76.54742500" alt="1030.30" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="162.105" vlookat="2.410" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/VESTIER.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/VESTIER.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<hotspot name="spot1743388657" style="skin_hotspotstyle" ath="-147.713" atv="-1.643" depth="1000.0" linkedscene="scene_bano_ppal" />
+		<hotspot name="spot1743388744" style="skin_hotspotstyle" ath="-54.621" atv="-3.247" depth="1000.0" linkedscene="scene_alcoba_principal" />
+
+	</scene>
+
+	<scene name="scene_zona_de_ropas" title="ZONA DE ROPAS" onstart="" thumburl="panos/ZONA_DE_ROPAS.tiles/thumb.jpg" lat="3.42904333" lng="-76.54737500" alt="1028.80" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="10.566" vlookat="1.903" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/ZONA_DE_ROPAS.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/ZONA_DE_ROPAS.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+
+		<hotspot name="spot1743388924" style="skin_hotspotstyle" ath="-84.324" atv="-3.899" depth="1000.0" linkedscene="scene_comedor" />
+
+	</scene>
+
+
+</krpano>
