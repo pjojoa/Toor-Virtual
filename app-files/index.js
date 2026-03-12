@@ -115,6 +115,12 @@
       btn.style.top  = pos.y + '%';
       btn.style.pointerEvents = 'auto';
 
+      // Tooltip con el nombre de la escena
+      var tip = document.createElement('span');
+      tip.className = 'floorPlanMarker-tooltip';
+      tip.textContent = sceneData.name;
+      btn.appendChild(tip);
+
       var manual = manualPositions[sceneData.name];
       if (manual) {
         if (manual.left) btn.style.left = manual.left;
@@ -255,7 +261,6 @@
   function populateGallery() {
     if (!galleryStripElement) return;
     galleryStripElement.innerHTML = '';
-    galleryImgBySceneId = {};
     scenes.forEach(function(scene) {
       var item = document.createElement('div');
       item.className = 'galleryItem';
@@ -267,7 +272,8 @@
       img.loading  = 'lazy';
       img.decoding = 'async';
       img.alt      = scene.data.name;
-      img.src      = 'tiles/' + scene.data.id + '/preview.jpg';
+      // Usar fotos estáticas exportadas (carpeta img/estaticas/)
+      img.src      = 'img/estaticas/' + scene.data.id + '.jpg';
       img.dataset.sceneId = scene.data.id;
 
       var label = document.createElement('div');
@@ -292,7 +298,6 @@
       });
 
       galleryStripElement.appendChild(item);
-      galleryImgBySceneId[scene.data.id] = img;
     });
   }
 
@@ -345,74 +350,9 @@
     window.addEventListener('mouseup', onMouseUp);
   }
 
-  // Reemplaza miniaturas de galería con la primera vista real de cada escena.
-  // Mantiene preview.jpg como fallback para no perder funcionalidad.
-  function buildInitialViewGalleryThumbs() {
-    if (!Marzipano || !galleryStripElement || !data || !data.scenes || !data.scenes.length) return;
-
-    var container = document.createElement('div');
-    container.setAttribute('aria-hidden', 'true');
-    container.style.position = 'fixed';
-    container.style.left = '-9999px';  /* fuera de pantalla, SIN opacity:0 para que WebGL renderice bien */
-    container.style.top = '0';
-    container.style.width = '480px';   /* más grande → captura de mayor calidad */
-    container.style.height = '270px';
-    container.style.overflow = 'hidden';
-    container.style.pointerEvents = 'none';
-    container.style.visibility = 'hidden'; /* oculto visualmente pero sin afectar el renderizado WebGL */
-    document.body.appendChild(container);
-
-    var thumbViewer = new Marzipano.Viewer(container, { controls: { mouseViewMode: 'drag' } });
-    var thumbScenes = data.scenes.map(function(sceneData) {
-      var urlPrefix = 'tiles';
-      var source = Marzipano.ImageUrlSource.fromString(
-        urlPrefix + '/' + sceneData.id + '/{z}/{f}/{y}/{x}.jpg',
-        { cubeMapPreviewUrl: urlPrefix + '/' + sceneData.id + '/preview.jpg' }
-      );
-      var geometry = new Marzipano.CubeGeometry(sceneData.levels);
-      var limiter  = Marzipano.RectilinearView.limit.traditional(
-        sceneData.faceSize, 100 * Math.PI / 180, 120 * Math.PI / 180
-      );
-      var view  = new Marzipano.RectilinearView(sceneData.initialViewParameters, limiter);
-      var scene = thumbViewer.createScene({ source: source, geometry: geometry, view: view, pinFirstLevel: true });
-      return { id: sceneData.id, scene: scene };
-    });
-
-    function cleanup() {
-      try { if (container && container.parentNode) container.parentNode.removeChild(container); } catch (_) {}
-    }
-
-    function captureAt(i) {
-      if (i >= thumbScenes.length) {
-        cleanup();
-        return;
-      }
-
-      thumbViewer.switchScene(thumbScenes[i].scene);
-      setTimeout(function() {
-        try {
-          var canvas = container.querySelector('canvas');
-          if (canvas && canvas.width > 0 && canvas.height > 0) {
-            var dataUrl = canvas.toDataURL('image/jpeg', 1.0); /* máxima calidad */
-            var img = galleryImgBySceneId[thumbScenes[i].id];
-            if (img) {
-              img.src = dataUrl;
-              img.style.opacity = '1';
-              img.style.filter  = 'none';
-            }
-          }
-        } catch (_) {}
-        captureAt(i + 1);
-      }, 320); /* más tiempo → más tiles cargados antes de capturar */
-    }
-
-    setTimeout(function() { captureAt(0); }, 400); /* espera inicial para que el viewer esté listo */
-  }
-
   if (galleryOverlayElement) {
     populateGallery();
     enableGalleryStripDrag();
-    buildInitialViewGalleryThumbs();
 
     // Flechas de navegación de la tira de miniaturas
     var galleryArrowPrev = document.getElementById('gallery-arrow-prev');
@@ -620,8 +560,9 @@
     });
   }
 
-  // Start with the first scene
-  switchScene(scenes[0]);
+  // Start with \"Punto central 1\" (fallback: first scene)
+  var initialScene = findSceneById('11-punto-central-1') || scenes[0];
+  switchScene(initialScene);
 
   // Navigation bar integration
   if (window.TourNavigationBar) {
