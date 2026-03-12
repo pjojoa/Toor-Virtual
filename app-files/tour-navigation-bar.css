@@ -1,0 +1,188 @@
+/* TOUR NAVIGATION BAR */
+
+.tour-navigation-bar {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%) translateY(100%);
+  z-index: 9999;
+  width: 100%;
+  max-width: 1064px; /* ~ +40% */
+  padding: 11px 17px 14px; /* ~ +40% */
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.tour-navigation-bar.is-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Línea negra que define el ancho del panel de controles */
+.tour-navigation-bar::after {
+  content: '';
+  position: absolute;
+  left: 17px;
+  right: 17px;
+  bottom: 8px;
+  height: 2px;
+  background: #000;
+  pointer-events: none;
+}
+
+.tour-nav-inner {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  height: 73px;        /* 52 * 1.4 */
+  padding: 0 20px;     /* 14 * 1.4 */
+  background: transparent; /* sin fondo */
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  gap: 6px;
+}
+
+.tour-nav-middle {
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.tour-nav-group {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.tour-nav-btn {
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 14px;
+  background: transparent; /* botón sin fondo */
+  color: #000; /* iconos negros */
+  font-size: 23px; /* ligeramente menor para verse menos grueso */
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  flex-shrink: 0;
+}
+
+.tour-nav-btn:hover {
+  background: transparent;
+  color: #000;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.65) inset;
+}
+
+.tour-nav-btn:active {
+  transform: scale(0.90);
+  background: transparent;
+}
+
+.tour-nav-btn i {
+  font-size: 23px; /* ligeramente menor para verse menos grueso */
+  font-weight: 900; /* requerido para .fas (solid) - evita el cuadro con X */
+  line-height: 1;
+  pointer-events: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prev / Next más grandes en los extremos */
+#tour-nav-prev i,
+#tour-nav-next i {
+  font-size: 28px;
+}
+
+/* Separador eliminado (layout centrado con extremos prev/next) */
+
+/* Play/Pause activo */
+.tour-nav-btn-play.is-active {
+  color: #000;
+  background: transparent;
+  box-shadow: none;
+}
+
+.tour-nav-btn-pause.is-active {
+  color: #000;
+  box-shadow: none;
+}
+
+/* Botón grid activo (miniaturas abiertas) */
+.tour-nav-btn.is-grid-active {
+  color: #000;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Estado activo: solo una sombra pequeña en el ícono */
+.tour-nav-btn-play.is-active i,
+.tour-nav-btn-pause.is-active i,
+.tour-nav-btn.is-grid-active i {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.80);
+}
+
+/* Responsive móvil */
+@media (max-width: 600px) {
+  .tour-navigation-bar {
+    max-width: none;
+    padding: 9px 12px 12px;
+  }
+  .tour-navigation-bar::after {
+    left: 12px;
+    right: 12px;
+    bottom: 6px;
+  }
+  .tour-nav-inner {
+    height: 67px;
+    padding: 0 14px;
+  }
+  .tour-nav-middle {
+    gap: 11px;
+  }
+  .tour-nav-btn {
+    width: 53px;
+    height: 53px;
+  }
+  .tour-nav-btn i {
+    font-size: 20px;
+  }
+  #tour-nav-prev i,
+  #tour-nav-next i {
+    font-size: 25px;
+  }
+}
+
+/* Accesibilidad */
+.tour-nav-btn:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 2px;
+}
