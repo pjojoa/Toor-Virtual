@@ -59,6 +59,31 @@
     }
   }
 
+  function transformPointLabel(name) {
+    if (!name) return '';
+
+    // Reglas de transformación
+    if (name === 'Zona de oficios') return 'Zona de ropas';
+    if (name === 'Balcon 2') return 'Balcon';
+    if (name === 'Habitación secundaria 2') return 'Alcoba';
+    if (name === 'Habitación secundaria') return 'Alcoba';
+    if (name === 'Habitación entrada') return 'Alcoba ppal';
+    if (name === 'Espacio abierto') return 'Espacio Disponible';
+    if (name === 'Baño secundario') return 'Baño Auxiliar';
+
+    // Valores sin nombre final (no mostrar)
+    if (name === 'Punto medio Espacio abierto') return '';
+    if (name === 'Punto central 1') return '';
+    if (name === 'Punto central 2') return '';
+    // También cubre el typo proporcionado por el usuario
+    if (name === 'Punto centrol 1') return '';
+    if (name === 'Punto centrol 2') return '';
+    if (name === 'Habitación entrada vestier') return '';
+    if (name === 'Habitación ppal mesa de noche') return '';
+
+    return name;
+  }
+
   function createFloorPlanMarkers() {
     if (!floorPlanMarkersElement) return;
     floorPlanMarkersElement.innerHTML = '';
@@ -110,16 +135,19 @@
       var btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'floorPlanMarker';
-      btn.setAttribute('aria-label', 'Ir a: ' + sceneData.name);
+      var floorLabel = transformPointLabel(sceneData.name);
+      btn.setAttribute('aria-label', floorLabel ? ('Ir a: ' + floorLabel) : 'Ir a escena');
       btn.style.left = pos.x + '%';
       btn.style.top  = pos.y + '%';
       btn.style.pointerEvents = 'auto';
 
       // Tooltip con el nombre de la escena
-      var tip = document.createElement('span');
-      tip.className = 'floorPlanMarker-tooltip';
-      tip.textContent = sceneData.name;
-      btn.appendChild(tip);
+      if (floorLabel) {
+        var tip = document.createElement('span');
+        tip.className = 'floorPlanMarker-tooltip';
+        tip.textContent = floorLabel;
+        btn.appendChild(tip);
+      }
 
       var manual = manualPositions[sceneData.name];
       if (manual) {
@@ -488,12 +516,17 @@
 
     stopTouchAndScrollEventPropagation(wrapper);
 
-    var tooltip = document.createElement('div');
-    tooltip.classList.add('hotspot-tooltip', 'link-hotspot-tooltip');
-    tooltip.innerHTML = findSceneDataById(hotspot.target).name;
+    var targetSceneData = findSceneDataById(hotspot.target);
+    var targetName = targetSceneData ? targetSceneData.name : '';
+    var hotspotLabel = transformPointLabel(targetName);
 
     wrapper.appendChild(icon);
-    wrapper.appendChild(tooltip);
+    if (hotspotLabel) {
+      var tooltip = document.createElement('div');
+      tooltip.classList.add('hotspot-tooltip', 'link-hotspot-tooltip');
+      tooltip.textContent = hotspotLabel;
+      wrapper.appendChild(tooltip);
+    }
     return wrapper;
   }
 

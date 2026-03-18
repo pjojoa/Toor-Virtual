@@ -544,72 +544,36 @@ body.floorplan-open #floorPlanToggle {
 
 .link-hotspot-tooltip {
   position: absolute;
-  left: 100%;
-  top: 14px; /* ( 60 - (16 + 2*8) ) / 2 */
+  left: 50%;
+  top: calc(100% + 6px);
+  transform: translateX(-50%);
 
-  margin-left: 3px;
+  font-size: 12px;
+  max-width: 220px;
+  padding: 4px 7px;
+  border-radius: 7px;
 
-  font-size: 16px;
-
-  max-width: 300px;
-
-  padding: 8px 10px;
-
-  border-radius: 5px;
-
-  background-color: rgb(58,68,84);
-  background-color: rgba(58,68,84,0.8);
-
+  background-color: rgba(0,0,0,0.72);
   color: #fff;
 
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 
-  cursor: pointer;
+  /* Siempre visible */
+  opacity: 1;
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
 
-  opacity: 0;
-
-  -ms-transform: translateX(-8px);
-  -webkit-transform: translateX(-8px);
-  transform: translateX(-8px);
-
-  -webkit-transition: -ms-transform 0.3s,
-                      -webkit-transform 0.3s,
-                      transform 0.3s,
-                      opacity 0.3s;
-  transition: -ms-transform 0.3s,
-              -webkit-transform 0.3s,
-              transform 0.3s,
-              opacity 0.3s;
+  /* Evitar que bloquee clics sobre el hotspot */
+  pointer-events: none;
 }
 
 .mobile .link-hotspot {
   top: 19px; /* ( 70 - (16 + 2*8) ) / 2 */
 }
 
-.no-touch .link-hotspot:hover .link-hotspot-tooltip {
-  opacity: 1;
-  -ms-transform: translateX(0);
-  -webkit-transform: translateX(0);
-  transform: translateX(0);
-}
-
-/* Prevent tooltip from triggering */
-.link-hotspot-tooltip {
-  pointer-events: none;
-}
-.no-touch .link-hotspot:hover .link-hotspot-tooltip {
-  pointer-events: all;
-}
-
-/* Fallback mode without pointer-events (IE8-10) */
-.tooltip-fallback .link-hotspot-tooltip {
-  display: none;
-}
-.no-touch .tooltip-fallback .link-hotspot:hover .link-hotspot-tooltip {
-  display: block;
-}
+/* Ya no dependemos de hover para mostrar el texto */
 
 /* Info hotspot */
 
